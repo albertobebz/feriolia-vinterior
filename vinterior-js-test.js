@@ -1,6 +1,6 @@
 function Checkout(promotionType) {
   this.promotionType = promotionType;
-  this.subtotal = 0;
+  this.subTotal = 0;
   this.basket = [];
 }
 
@@ -21,12 +21,34 @@ Checkout.prototype = {
     else{console.log('Item not found')};
   },
 
+  total: function() {
+    if(this.subTotal >= 60) {
+      var discount = (this.subTotal * 10)/100;
+      this.subTotal -= discount;
+      return this.subTotal;
+    } else {
+      return this.subTotal;
+    }
+    console.log(this.subTotal);
+  }
+
 }
 
 // ****USE OF THE INTERFACE**** //
 
-// Create a 'co' instance
-var co = new Checkout('promotionType');
+// Create an instance
+var co = new Checkout("promotionType");
+
 // Scan items
-co.scan('001');
-co.scan('002', 2);
+co.scan("001");
+co.scan("002");
+co.scan("003");
+
+// Show the items in the basket
+console.log(co.basket);
+
+// Checkout and see the Total
+co.total();
+
+// Show the total
+console.log('Your total is ' + co.subTotal); // resutl => 66.78
