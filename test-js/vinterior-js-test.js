@@ -30,6 +30,11 @@ Checkout.prototype = {
       return this.subTotal;
     }
     console.log(this.subTotal);
+  },
+
+  clearTotal: function() {
+    this.subTotal = 0;
+    this.basket = [];
   }
 
 }
@@ -38,17 +43,30 @@ Checkout.prototype = {
 
 // Create an instance
 var co = new Checkout("promotionType");
-
 // Scan items
 co.scan("001");
 co.scan("002");
 co.scan("003");
-
 // Show the items in the basket
 console.log(co.basket);
-
 // Checkout and see the Total
 co.total();
-
 // Show the total
 console.log('Your total is ' + co.subTotal); // resutl => 66.78
+
+// manual test 2
+co.clearTotal();
+co.scan("001", 2);
+co.scan("003");
+console.log(co.basket);
+co.total();
+console.log('Your total is ' + co.subTotal); // resutl => 36.95
+
+// manual test 3
+co.clearTotal();
+co.scan("001", 2);
+co.scan("002");
+co.scan("003");
+console.log(co.basket);
+co.total();
+console.log('Your total is ' + co.subTotal); // resutl => 73.75
